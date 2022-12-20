@@ -176,40 +176,40 @@ function createHtml() {
   generatedHtml.push(header);
 
   for (let i = 0; i < employeeContainer.length; i++) {
-    
     if (employeeContainer[i].officeNumber) {
-
-        profilesArray.innerHTML =
-        `            <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+      employeeProfArray.innerHTML = `            <div class="card text-center ml-4 mr-4 mb-5 border-dark">
         <div class="card-body bg-danger text-light">
-            <h4 class="card-header">Name: ${employeesArray[i].name}</h4>
-            <h4 class="card-title">${employeesArray[i].getRole()}</h4>
+            <h4 class="card-header">Name: ${employeesContainer[i].name}</h4>
+            <h4 class="card-title">${employeesContainer[i].getRole()}</h4>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID: ${employeesArray[i].id}</li>
-            <li class="list-group-item">Email: <a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
-            <li class="list-group-item">Phone Number: ${employeesArray[i].officeNumber}</li>
+            <li class="list-group-item">ID: ${employeesContainer[i].id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${
+              employeesContainer[i].email
+            }">${employeesContainer[i].email}</a></li>
+            <li class="list-group-item">Phone Number: ${
+              employeesContainer[i].officeNumber
+            }</li>
         </ul>
-    </div>`
-
-} else if (employeesArray[i].github) {
-
-    profilesArray.innerHTML +=
-        `
+    </div>`;
+    } else if (employeeContainer[i].github) {
+      employeeProfArray.innerHTML += `
 <div class="card text-center ml-4 mr-4 mb-5 border-dark"></div>
 <div class="card-body bg-info text-light">
-    <h4 class="card-header">${employeesArray[i].name}</h4>
+    <h4 class="card-header">${employeeContainer[i].name}</h4>
     <h4 class="card-title">${employeesArray[i].getRole()}</h4>
 </div>
 <ul class="list-group list-group-flush">
-<li class="list-group-item">ID: ${employeesArray[i].id}</li>
-<li class="list-group-item">Email: <a href="mailto:${employeesArray[i].email}">${employeesArray[i].email}</a></li>
-<li class="list-group-item"><a href="${employeesArray[i].getGithub()}" target= "_blank">GitHub</a></li>
+<li class="list-group-item">ID: ${employeesContainer[i].id}</li>
+<li class="list-group-item">Email: <a href="mailto:${
+        employeesContainer[i].email
+      }">${employeesContainer[i].email}</a></li>
+<li class="list-group-item"><a href="${employeesContainer[
+        i
+      ].getGithub()}" target= "_blank">GitHub</a></li>
 </ul>
 </div>
-`
-
-}
+`;
     }
   }
 }
