@@ -32,3 +32,4 @@ Github: https://github.com/anthonynguyen-dev
 Live Site: https://anthonynguyen-dev.github.io/employee-generator/
 Github Link: https://github.com/anthonynguyen-dev/employee-generator
 ![Site Image](<./images/Screenshot (24).png>)
+![Site Image](<./images/Screenshot (26).png>)
