@@ -69,7 +69,7 @@ function newEmployee() {
       } else if (response.employee === "Intern") {
         internQuestions();
       } else {
-        create();
+        createHtml();
       }
     });
 }
@@ -179,16 +179,16 @@ function createHtml() {
     if (employeeContainer[i].officeNumber) {
       employeeProfArray.innerHTML = `            <div class="card text-center ml-4 mr-4 mb-5 border-dark">
         <div class="card-body bg-danger text-light">
-            <h4 class="card-header">Name: ${employeesContainer[i].name}</h4>
-            <h4 class="card-title">${employeesContainer[i].getRole()}</h4>
+            <h4 class="card-header">Name: ${employeeContainer[i].name}</h4>
+            <h4 class="card-title">${employeeContainer[i].getRole()}</h4>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">ID: ${employeesContainer[i].id}</li>
+            <li class="list-group-item">ID: ${employeeContainer[i].id}</li>
             <li class="list-group-item">Email: <a href="mailto:${
-              employeesContainer[i].email
-            }">${employeesContainer[i].email}</a></li>
+              employeeContainer[i].email
+            }">${employeeContainer[i].email}</a></li>
             <li class="list-group-item">Phone Number: ${
-              employeesContainer[i].officeNumber
+              employeeContainer[i].officeNumber
             }</li>
         </ul>
     </div>`;
@@ -197,40 +197,53 @@ function createHtml() {
 <div class="card text-center ml-4 mr-4 mb-5 border-dark"></div>
 <div class="card-body bg-info text-light">
     <h4 class="card-header">${employeeContainer[i].name}</h4>
-    <h4 class="card-title">${employeesArray[i].getRole()}</h4>
+    <h4 class="card-title">${employeeContainer[i].getRole()}</h4>
 </div>
 <ul class="list-group list-group-flush">
-<li class="list-group-item">ID: ${employeesContainer[i].id}</li>
+<li class="list-group-item">ID: ${employeeContainer[i].id}</li>
 <li class="list-group-item">Email: <a href="mailto:${
-        employeesContainer[i].email
-      }">${employeesContainer[i].email}</a></li>
-<li class="list-group-item"><a href="${employeesContainer[
+        employeeContainer[i].email
+      }">${employeeContainer[i].email}</a></li>
+<li class="list-group-item"><a href="${employeeContainer[
         i
       ].getGithub()}" target= "_blank">GitHub</a></li>
 </ul>
 </div>
 `;
+    } else if (employeeContainer[i].school) {
+      employeeProfArray.innerHTML += `
+    <div class="card text-center ml-4 mr-4 mb-5 border-dark">
+    <div class="card-body bg-warning text-light">
+    <h4 class="card-header">${employeeContainer[i].name}</h4>
+    <h4 class="card-title">${employeeContainer[i].getRole()}</h4>
+    </div>
+    <ul class="list-group list-group-flush">
+    <li class="list-group-item">ID: ${employeeContainer[i].id}</li>
+    <li class="list-group-item">Email: <a href="mailto:${
+      employeeContainer[i].email
+    }">${employeeContainer[i].email}</a></li>
+    <li class="list-group-item">School: ${employeeContainer[i].school}</li>
+    </ul>
+</div>
+    `;
     }
   }
-}
+  generatedHtml.push(employeeProfArray.innerHTML);
+  let bottomHTML = `
+  </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  </body>
+  </html>
+  `;
 
-function managerCard(input) {
-  return `${input.managerName}
-    ${input.managerID}
-    ${input.managerEmail}
-    ${input.managerNumber}`;
-}
+  generatedHtml.push(bottomHTML);
 
-function internCard(input) {
-  return `${input.internName}
-    ${input.internID}
-    ${input.internEmail}
-    ${input.internSchool}`;
-}
-
-function engineerCard(input) {
-  return `${input.engineerName}
-    ${input.engineerID}
-    ${input.engineerEmail}
-    ${input.engineerGithub}`;
+  fs.writeFile(
+    "./generatedHtml/createdHtml.html",
+    generatedHtml.join(""),
+    function (err) {
+      err ? console.error(err) : console.log("Team is Built!");
+    }
+  );
 }
